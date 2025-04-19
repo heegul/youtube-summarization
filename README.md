@@ -1,150 +1,138 @@
-# YouTube Summarization App
+# YouTube Video Summarization
 
-A full-stack application for summarizing YouTube videos, generating tags, and creating a searchable library of summaries.
+A modern web application that allows users to get AI-generated summaries of YouTube videos.
 
 ## Features
 
-- **Video Summarization**: Generate concise summaries of YouTube videos
-- **Multiple Summarization Styles**: Choose from various personas (Default, News Reporter, Researcher, Teacher)
-- **LLM Model Selection**: Use either cloud-based or local LLMs for summarization
-- **Tag Generation**: Automatically extract relevant tags from summaries
-- **Save & Search**: Store summaries in a searchable library for future reference
-- **Cross-Platform**: Web interface and iOS mobile application
+- 🎥 Input any YouTube video URL
+- 📝 Generate concise summaries using AI
+- 💾 Save summaries for later reference
+- 🚀 Fast and responsive user interface
 
 ## Technology Stack
 
 ### Backend
-- **Node.js & Express**: Server framework
-- **TypeScript**: Type-safe JavaScript
-- **MongoDB**: Database for storing summaries and metadata
-- **Redis**: Caching layer for improved performance
-- **YouTube API**: Retrieving video details and transcripts
-- **Ollama**: Running local LLM models
-- **OpenAI API**: Cloud-based LLM processing
+- Node.js with Express
+- TypeScript
+- MongoDB for data storage
+- Redis for caching
+- YouTube Data API for video information
+- OpenAI API for generating summaries
 
 ### Frontend
-- **React**: Web UI library
-- **Next.js**: React framework with SSR
-- **TypeScript**: Type-safe JavaScript
-- **React Native**: Mobile application development
+- Next.js with React
+- TypeScript
+- Tailwind CSS for styling
+- SWR for data fetching
 
-### CI/CD & Deployment
-- **Docker**: Containerization
-- **GitHub Actions**: CI/CD pipeline
-- **Fastlane**: iOS deployment automation
-- **TestFlight & App Store**: iOS distribution
+### Infrastructure
+- Docker for containerization
+- Docker Compose for orchestration
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v16+)
-- MongoDB
-- Redis
-- Ollama (optional, for local LLM processing)
-- YouTube API key
+
+- Node.js 18+
+- Docker and Docker Compose
+- YouTube API Key
+- OpenAI API Key
 
 ### Installation
 
-1. Clone the repository
+1. **Clone the repository**
+
 ```bash
-git clone https://github.com/yourusername/youtube-summarization.git
+git clone https://github.com/heegul/youtube-summarization.git
 cd youtube-summarization
 ```
 
-2. Install dependencies
-```bash
-# Backend
-cd backend
-npm install
+2. **Set up environment variables**
 
-# Frontend
-cd ../frontend
-npm install
-```
+Copy the example environment files:
 
-3. Configure environment variables
 ```bash
-# Backend
 cp backend/.env.example backend/.env
-# Edit .env file with your configuration
-
-# Frontend
-cp frontend/.env.example frontend/.env
-# Edit .env file with your configuration
+cp frontend/.env.example frontend/.env.local
 ```
 
-4. Start the development servers
+Update the environment variables in both files with your API keys and configuration.
+
+3. **Start the application with Docker Compose**
+
 ```bash
-# Backend
+docker-compose up -d
+```
+
+The application will be available at:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:4000
+
+### Development
+
+For local development without Docker:
+
+1. **Backend:**
+
+```bash
 cd backend
-npm run dev
-
-# Frontend
-cd ../frontend
+npm install
 npm run dev
 ```
 
-5. (Optional) Set up Ollama for local LLM processing
+2. **Frontend:**
+
 ```bash
-# Install Ollama
-curl -fsSL https://ollama.ai/install.sh | sh
-
-# Pull required models
-ollama pull llama2
-ollama pull mistral
-
-# Start Ollama server
-ollama serve
+cd frontend
+npm install
+npm run dev
 ```
 
-## Usage
+## Testing
 
-1. Open the application in your browser at `http://localhost:3000`
-2. Enter a YouTube video ID or URL
-3. Select a summarization persona and LLM model
-4. Click "Summarize" to generate a summary
-5. View, save, and manage your summaries
+### Running Tests
+
+```bash
+# Backend tests
+cd backend
+npm test
+
+# Frontend tests
+cd frontend
+npm test
+```
+
+## Deployment
+
+For deployment options and instructions, please refer to the [DEPLOYMENT.md](DEPLOYMENT.md) file.
 
 ## Project Structure
 
-- **`/backend`**: Express server and API
-  - `/controllers`: Request handlers
-  - `/services`: Business logic and external integrations
-  - `/models`: MongoDB schema definitions
-  - `/routes`: API endpoint definitions
-  - `/utils`: Helper functions and utilities
-
-- **`/frontend`**: Next.js web application
-  - `/pages`: Application routes
-  - `/components`: Reusable UI components
-  - `/styles`: CSS and styling
-  - `/hooks`: Custom React hooks
-
-- **`/mobile`**: React Native iOS application
-  - `/ios`: iOS-specific code
-  - `/src`: Cross-platform application code
-  - `/components`: Reusable UI components
-
-## Documentation
-
-- [To-Do List](TO-DO-LIST.md): Implementation tasks and progress tracking
-- [Deployment Guide](DEPLOYMENT.md): Instructions for CI/CD and deployment
-- [LLM Integration](LLM_INTEGRATION.md): Details on integrating local and cloud LLMs
+```
+├── backend/             # Express backend API
+│   ├── src/             # Source code
+│   │   ├── controllers/ # Request handlers
+│   │   ├── models/      # Mongoose models
+│   │   ├── routes/      # API routes
+│   │   ├── services/    # Business logic
+│   │   ├── utils/       # Utility functions
+│   │   └── server.ts    # Express app setup
+│   ├── tests/           # Test files
+│   └── Dockerfile       # Backend Docker configuration
+├── frontend/           # Next.js frontend
+│   ├── components/      # React components
+│   ├── pages/           # Next.js pages
+│   ├── styles/          # CSS styles
+│   ├── utils/           # Utility functions
+│   ├── __tests__/       # Test files
+│   └── Dockerfile       # Frontend Docker configuration
+└── docker-compose.yml   # Docker Compose configuration
+```
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- OpenAI for providing GPT models
-- Meta for Llama 2 models
-- YouTube API for access to video data
